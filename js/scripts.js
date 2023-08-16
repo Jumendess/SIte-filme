@@ -1,35 +1,35 @@
-const videos = [
-  {
-    title: "Somos Todos Iguais",
-    src: "https://vimeo.com/854879357?share",
-    thumbnail: "images/SomosTodosIguias.jpg"
-  },
-  {
-    title: "Caça as Bruxas",
-    src: "https://www.example.com/video2.mp4",
-    thumbnail: "images/cacaBruxas.jpg"
-  },
-  {
-    title: "Sem Limites",
-    src: "https://www.example.com/video3.mp4",
-    thumbnail: "images/semLimites.jpg"
-  },
-  {
-    title: "Vídeo 4",
-    src: "https://www.example.com/video4.mp4",
-    thumbnail: "images/missao-impossivel-poste.jpg" // Substitua pela imagem do vídeo 4
-  },
-  {
-    title: "Vídeo 5",
-    src: "https://www.example.com/video5.mp4",
-    thumbnail: "images/medio.jpg" // Substitua pela imagem do vídeo 5
-  },
-  {
-    title: "Vídeo 6",
-    src: "https://www.example.com/video6.mp4",
-    thumbnail: "images/dungeons-e-dragons.jpg" // Substitua pela imagem do vídeo 6
-  }
-];
+  const videos = [
+    {
+      title: "Somos Todos Iguais",
+      src: "https://i.imgur.com/6k74YUm.mp4",
+      thumbnail: "images/SomosTodosIguias.jpg"
+    },
+    {
+      title: "Caça as Bruxas",
+      src: "https://www.example.com/video2.mp4",
+      thumbnail: "images/cacaBruxas.jpg"
+    },
+    {
+      title: "Sem Limites",
+      src: "https://www.example.com/video3.mp4",
+      thumbnail: "images/semLimites.jpg"
+    },
+    {
+      title: "Vídeo 4",
+      src: "https://www.example.com/video4.mp4",
+      thumbnail: "images/missao-impossivel-poste.jpg" // Substitua pela imagem do vídeo 4
+    },
+    {
+      title: "Vídeo 5",
+      src: "https://www.example.com/video5.mp4",
+      thumbnail: "images/medio.jpg" // Substitua pela imagem do vídeo 5
+    },
+    {
+      title: "Vídeo 6",
+      src: "https://www.example.com/video6.mp4",
+      thumbnail: "images/dungeons-e-dragons.jpg" // Substitua pela imagem do vídeo 6
+    }
+  ];
 
 const gridContainer = document.querySelector('.grid-container');
 
@@ -80,7 +80,7 @@ function validateAndLogin() {
     alert("Por favor, preencha todos os campos.");
   } else {
     alert(`Email: ${email}\nSenha: ${password}`);
-    window.location.href = "index.html"; // Redireciona para a página index.html
+    window.location.href = "teste.html"; // Redireciona para a página index.html
   }
 }
 
