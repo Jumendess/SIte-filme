@@ -26,6 +26,18 @@
       background-repeat: no-repeat;
       background-position: center;
     }
+    /* Estilize o botão de sair */
+    .btn-sair {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #a02323;
+      color: #fff;
+      border: none;
+    }
+    .cab, .subTerror, .subComedia{
+      padding: 10px;
+    }
 
     @media (max-width: 768px) {
       .square {
@@ -37,7 +49,9 @@
   </style>
 </head>
 <body>
-  <div class="sugestao">
+
+  <div class="cab">
+    <button class="btn btn-sair" onclick="voltarParaIndex()">Sair</button>
     <h1 class="sugestao">Sugestões</h1>
   </div>
   <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -164,6 +178,10 @@
       const square = document.getElementById(squareId);
       square.style.backgroundImage = `url('${imageUrl}')`;
     }
+    function voltarParaIndex() {
+      window.location.href = 'index.html';
+    }
+
 
     // Exemplo: Adicionar imagens aos quadrados do carrossel "Sugestões"
     addImageToSquare('square1', 'images/dungeons-e-dragons.jpg');
