@@ -44,6 +44,37 @@
   h2, label {
     color: #FFF;
   }
+
+  .loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+  }
+
+  .loading {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #3498db;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: loadingAnimation 1s linear infinite;
+  }
+
+  @keyframes loadingAnimation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>
 </head>
 <body>
@@ -56,6 +87,43 @@
   <button onclick="validateAndLogin()">Entrar</button>
   <button onclick="register()">Cadastrar</button>
 </div>
-<script src="js/scripts.js"></script>
+<div id="loading-container" style="display: none;">
+  <div class="loading"></div>
+</div>
+<script>
+  var emailInput = document.getElementById('email');
+  var passwordInput = document.getElementById('password');
+  var loginButton = document.getElementById('loginButton');
+
+  function validateAndLogin() {
+    if (emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
+      hideLoginForm();
+      showLoading();
+      setTimeout(function() {
+        hideLoading();
+        redirectToPage();
+      }, 5000);
+    }
+  }
+
+  function hideLoginForm() {
+    var loginContainer = document.querySelector('.login-container');
+    loginContainer.style.display = 'none';
+  }
+
+  function showLoading() {
+    var loadingContainer = document.getElementById('loading-container');
+    loadingContainer.style.display = 'flex';
+  }
+
+  function hideLoading() {
+    var loadingContainer = document.getElementById('loading-container');
+    loadingContainer.style.display = 'none';
+  }
+
+  function redirectToPage() {
+    window.location.href = 'teste.html';
+  }
+</script>
 </body>
 </html>
