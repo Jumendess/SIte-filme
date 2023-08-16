@@ -2,6 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////
 //Tela de inicio
 
+
 function validateAndLogin() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;

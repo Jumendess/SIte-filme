@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filme Detalhes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background-color: #000000;
+    }
+
+    #filmeNome {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    #filmeSinopse {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    #trailer {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border: none;
+    }
+    h1, p{
+      color: #FFF;
+    }
+    #voltarButton {
+      background-color: blue;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 767px) {
+      #trailer {
+        height: 450px; /* Ajuste a altura para dispositivos móveis */
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="voltarButton" onclick="window.location.href = 'teste.html';">Voltar ao Menu Anterior</button>
+  <h1 id="filmeNome"></h1>
+  <p id="filmeSinopse"></p>
+  <iframe id="trailer" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+
+  <script>
+    // Leitura dos parâmetros da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const nomeFilme = urlParams.get('filme');
+
+    // Defina os detalhes do filme aqui, talvez usando um objeto ou um banco de dados
+    const filmes = {
+      'Dungeons & Dragons': {
+        nome: 'Dungeons & Dragons',
+        sinopse: 'Uma aventura mágica em um mundo de fantasia...',
+        trailerUrl: 'https://www.youtube.com/watch?v=4ej5yjOqBMI',
+      },
+      'Caça as Bruxas': {
+        nome: 'Caça as Bruxas',
+        sinopse: 'Uma aventura mágica em um mundo de fantasia...',
+        trailerUrl: 'https://www.youtube.com/watch?v=JmN389MNwEI',
+      },
+      'Besouro Azul': {
+        nome: 'Besouro Azul',
+        sinopse: 'Uma aventura mágica em um mundo de fantasia...',
+        trailerUrl: 'https://www.youtube.com/watch?v=IZw2slPIoGs',
+      },
+      'Missão Impossivel acerto de contas': {
+        nome: 'Missão Impossivel acerto de contas',
+        sinopse: '.',
+        trailerUrl: 'https://www.youtube.com/watch?v=kjTHrbPaDEU',
+      },
+      'Sem limites': {
+        nome: 'Sem limites',
+        sinopse: '.',
+        trailerUrl: 'https://www.youtube.com/watch?v=JMU_ksS3fq4',
+      },
+      'Somos todos diferentes': {
+        nome: 'Somos todos diferentes',
+        sinopse: '',
+        trailerUrl: 'https://www.youtube.com/watch?v=FufPvFK3mQ0',
+      },
+      'Veneza': {
+        nome: 'Veneza',
+        sinopse: '',
+        trailerUrl: 'https://www.youtube.com/watch?v=pzE3DQr5Af0',
+      },
+      'Nas ondas da fé': {
+        nome: 'Nas ondas da fé',
+        sinopse: '',
+        trailerUrl: 'https://www.youtube.com/watch?v=PDO20Dzxpss',
+      },
+      'Infiltrado': {
+        nome: 'Infiltrado',
+        sinopse: '',
+        trailerUrl: 'https://www.youtube.com/watch?v=VUi2OHA0_sw',
+      },
+      'Eu acredito': {
+        nome: 'Eu acredito',
+        sinopse: '',
+        trailerUrl: 'https://www.youtube.com/watch?v=s0sZzpeIMXU',
+      },
+      'A menina que roubava livros': {
+        nome: 'A menina que roubava livros',
+        sinopse: '',
+        trailerUrl: 'https://www.youtube.com/watch?v=J24AlOYHpVU',
+      },
+      'Contágio': {
+        nome: 'Contágio',
+        sinopse: '',
+        trailerUrl: 'https://www.youtube.com/watch?v=u-eGomOPITc',
+      },
+      // Adicione outros filmes com seus detalhes
+    };
+
+    const filmeSelecionado = filmes[nomeFilme];
+    if (filmeSelecionado) {
+      document.getElementById('filmeNome').textContent = filmeSelecionado.nome;
+      document.getElementById('filmeSinopse').textContent = filmeSelecionado.sinopse;
+      document.getElementById('trailer').src = filmeSelecionado.trailerUrl;
+    } else {
+      document.getElementById('filmeNome').textContent = 'Filme não encontrado';
+    }
+  </script>
+</body>
+</html>

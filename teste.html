@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,7 +58,7 @@
     <button class="btn btn-sair" onclick="voltarParaIndex()">Sair</button>
     <h1 class="sugestao">Sugestões</h1>
   </div>
-  <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div id="imageCarousel" class="carousel slide" >
     <div class="carousel-inner">
       <!-- Quadrados do carrossel - Linha 1 -->
       <div class="carousel-item active">
@@ -108,7 +108,7 @@
   </div>
 
   <!-- Carrossel de Imagens 2 (Filmes de terror) -->
-  <div id="terrorCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div id="terrorCarousel" class="carousel slide" >
     <div class="carousel-inner">
       <!-- Quadrados do carrossel - Linha 1 -->
       <div class="carousel-item active">
@@ -143,7 +143,7 @@
   <div class="subComedia">
     <h3 class="comedia">Comédias</h3>
   </div>
-  <div id="otherCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div id="otherCarousel" class="carousel slide" >
     <div class="carousel-inner">
       <!-- Quadrados do carrossel - Linha 1 -->
       <div class="carousel-item active">
@@ -164,11 +164,11 @@
       <!-- Adicione mais slides e quadrados conforme necessário -->
     </div>
     <!-- Controles do carrossel -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#otherCarousel" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#otherCarousel" >
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#otherCarousel" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#otherCarousel" >
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
@@ -178,28 +178,35 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Função para adicionar uma imagem a um quadrado
-    function addImageToSquare(squareId, imageUrl) {
-      const square = document.getElementById(squareId);
-      square.style.backgroundImage = `url('${imageUrl}')`;
-    }
+    function addImageToSquare(squareId, imageUrl, nomeFilme) {
+  const square = document.getElementById(squareId);
+  square.style.backgroundImage = `url('${imageUrl}')`;
+  square.addEventListener('click', () => openFilmePage(nomeFilme));
+}
     function voltarParaIndex() {
       window.location.href = 'index.html';
     }
+    function openFilmePage(nomeFilme) {
+  window.location.href = `filme.html?filme=${encodeURIComponent(nomeFilme)}`;
+}
+
 
 
     // Exemplo: Adicionar imagens aos quadrados do carrossel "Sugestões"
-    addImageToSquare('square1', 'images/dungeons-e-dragons.jpg');
-    addImageToSquare('square2', 'images/cacaBruxas.jpg');
-    addImageToSquare('square3', 'images/medio.jpg');
-    addImageToSquare('square4', 'images/missao-impossivel-poste.jpg');
-    addImageToSquare('square5', 'images/semLimites.jpg');
-    addImageToSquare('square6', 'images/SomosTodosIguias.jpg');
-    addImageToSquare('square7', 'images/veneza.jpg');
-    addImageToSquare('square8', 'images/nasondasdafe.jpg');
-    addImageToSquare('square9', 'images/infiltrado.jpg');
-    addImageToSquare('square10', 'images/euacredito.jpg');
-    addImageToSquare('square11', 'images/Menina.jpg');
-    addImageToSquare('square12', 'images/Contagio.png');
+    addImageToSquare('square1', 'images/dungeons-e-dragons.jpg', 'Dungeons & Dragons');
+    addImageToSquare('square2', 'images/cacaBruxas.jpg', 'Caça as Bruxas');
+    addImageToSquare('square3', 'images/medio.jpg', 'Besouro Azul');
+    addImageToSquare('square4', 'images/missao-impossivel-poste.jpg', 'Missão Impossivel acerto de contas');
+    addImageToSquare('square5', 'images/semLimites.jpg', 'Sem limites');
+    addImageToSquare('square6', 'images/SomosTodosIguias.jpg', 'Somos todos diferentes');
+    addImageToSquare('square7', 'images/veneza.jpg', 'Veneza');
+    addImageToSquare('square8', 'images/nasondasdafe.jpg', 'Nas ondas da fé');
+    addImageToSquare('square9', 'images/infiltrado.jpg', 'Infiltrado');
+    addImageToSquare('square10', 'images/euacredito.jpg', 'Eu acredito');
+    addImageToSquare('square11', 'images/Menina.jpg', 'A menina que roubava livros');
+    addImageToSquare('square12', 'images/Contagio.png', 'Contágio');
+
+
 
     addImageToSquare('square13', 'images/terror/colheita.jpg');
     addImageToSquare('square14', 'images/terror/convite.jpg');
