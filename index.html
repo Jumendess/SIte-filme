@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    background-color: black; /* Fundo preto */
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .grid-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: black; /* Fundo preto */
+  }
+
+  .grid-item button {
+    margin-top: 10px;
+    background-color: #8cff8c; /* Cor do botão em verde claro */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+  }
+
+  .video-title {
+    margin-top: 10px;
+    color: white;
+    text-align: center; /* Alinhamento central */
+  }
+
+  video {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+  }
+
+  .video-thumbnail {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: contain; /* Mantém toda a imagem visível */
+  }
+</style>
+<title>Quadros com Vídeos</title>
+</head>
+<body>
+  <div class="grid-container">
+    <!-- Vídeos e thumbnails serão adicionados dinamicamente aqui -->
+  </div>
+
+  <script>
+    const videos = [
+      {
+        title: "Somos Todos Iguais",
+        src: "https://vimeo.com/854879357?share",
+        thumbnail: "images/SomosTodosIguias.jpg"
+      },
+      {
+        title: "Caça as Bruxas",
+        src: "https://www.example.com/video2.mp4",
+        thumbnail: "images/cacaBruxas.jpg"
+      },
+      {
+        title: "Sem Limites",
+        src: "https://www.example.com/video3.mp4",
+        thumbnail: "images/semLimites.jpg"
+      },
+      {
+        title: "Vídeo 4",
+        src: "https://www.example.com/video4.mp4",
+        thumbnail: "images/missao-impossivel-poste.jpg" // Substitua pela imagem do vídeo 4
+      },
+      {
+        title: "Vídeo 5",
+        src: "https://www.example.com/video5.mp4",
+        thumbnail: "images/medio.jpg" // Substitua pela imagem do vídeo 5
+      },
+      {
+        title: "Vídeo 6",
+        src: "https://www.example.com/video6.mp4",
+        thumbnail: "images/dungeons-e-dragons.jpg" // Substitua pela imagem do vídeo 6
+      }
+    ];
+
+    const gridContainer = document.querySelector('.grid-container');
+
+    videos.forEach(videoInfo => {
+      const videoItem = document.createElement('div');
+      videoItem.classList.add('grid-item');
+
+      const thumbnail = document.createElement('img');
+      thumbnail.src = videoInfo.thumbnail;
+      thumbnail.classList.add('video-thumbnail');
+
+      const titleElement = document.createElement('div');
+      titleElement.classList.add('video-title');
+      titleElement.textContent = videoInfo.title;
+
+      const watchButton = document.createElement('button');
+      watchButton.textContent = 'Assistir';
+      watchButton.addEventListener('click', () => {
+        videoItem.removeChild(thumbnail);
+        videoItem.removeChild(titleElement);
+        videoItem.removeChild(watchButton);
+
+        const video = document.createElement('video');
+        video.controls = true;
+        video.classList.add('video-item');
+        const source = document.createElement('source');
+        source.src = videoInfo.src;
+        source.type = 'video/mp4';
+        video.appendChild(source);
+
+        videoItem.appendChild(video);
+        video.play();
+      });
+
+      videoItem.appendChild(thumbnail);
+      videoItem.appendChild(titleElement);
+      videoItem.appendChild(watchButton);
+      gridContainer.appendChild(videoItem);
+    });
+  </script>
+</body>
+</html>
