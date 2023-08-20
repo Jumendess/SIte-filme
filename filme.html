@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filme Detalhes</title>
   <style>
-    body {
+   body {
       font-family: Arial, sans-serif;
       padding: 20px;
       margin: 0;
       background-color: #000000;
+      color: #FFF;
     }
 
     #filmeNome {
@@ -22,15 +23,6 @@
       margin-bottom: 20px;
     }
 
-    #trailer {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-      border: none;
-    }
-    h1, p{
-      color: #FFF;
-    }
     #voltarButton {
       background-color: blue;
       color: white;
@@ -41,9 +33,29 @@
       margin-bottom: 10px;
     }
 
+    /* Estilos para dispositivos móveis */
     @media (max-width: 767px) {
-      #trailer {
-        height: 450px; /* Ajuste a altura para dispositivos móveis */
+      #trailerContainer {
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* Proporção de 16:9 para o vídeo */
+        position: relative;
+      }
+
+      #trailerContainer iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    /* Estilos para dispositivos maiores */
+    @media (min-width: 768px) {
+      #trailerContainer {
+        width: 100%;
+        max-width: 560px;
+        height: 315px;
+        margin: 0 auto;
       }
     }
   </style>
@@ -52,7 +64,9 @@
   <button id="voltarButton" onclick="window.location.href = 'teste.html';">Voltar ao Menu Anterior</button>
   <h1 id="filmeNome"></h1>
   <p id="filmeSinopse"></p>
-  <iframe id="trailer" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+  <div id="trailerContainer">
+    <!-- O vídeo será inserido aqui -->
+  </div>
 
   <script>
     // Leitura dos parâmetros da URL
@@ -128,7 +142,16 @@
     if (filmeSelecionado) {
       document.getElementById('filmeNome').textContent = filmeSelecionado.nome;
       document.getElementById('filmeSinopse').textContent = filmeSelecionado.sinopse;
-      document.getElementById('trailer').src = filmeSelecionado.trailerUrl;
+
+      const trailerContainer = document.getElementById('trailerContainer');
+      const iframe = document.createElement('iframe');
+      iframe.width = '560';
+      iframe.height = '315';
+      iframe.frameborder = '0';
+      iframe.allowfullscreen = true;
+      iframe.src = `https://www.youtube.com/embed/${filmeSelecionado.trailerUrl.split('v=')[1]}`;
+
+      trailerContainer.appendChild(iframe);
     } else {
       document.getElementById('filmeNome').textContent = 'Filme não encontrado';
     }
