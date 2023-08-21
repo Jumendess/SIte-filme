@@ -1,129 +1,343 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Form</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: black;
-  }
-
-  .login-container {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
-
-  input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-  }
-
-  button {
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-
-  h2, label {
-    color: #FFF;
-  }
-
-  .loading-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-  }
-
-  .loading {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #3498db;
-    border-top: 5px solid transparent;
-    border-radius: 50%;
-    animation: loadingAnimation 1s linear infinite;
-  }
-
-  @keyframes loadingAnimation {
-    0% {
-      transform: rotate(0deg);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel de Imagens</title>
+  <!-- Inclua o Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet&family=Tilt+Prism&display=swap" rel="stylesheet">
+  <style>
+    body{
+      background-color: #000;
     }
-    100% {
-      transform: rotate(360deg);
+    h2, h3{
+      color: #FFF;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
-  }
-</style>
+    /* Estilize os quadrados */
+    .square {
+      width: 200px;
+      height: 200px;
+      background-color: #000000;
+      margin: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    /* Estilize o botão de sair */
+    .btn-sair {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #a02323;
+      color: #fff;
+      border: none;
+    }
+    .cab, .subTerror, .subComedia{
+      padding: 10px;
+    }
+    .navbar-brand{
+      padding-left: 10px;
+      font-family: 'Tilt Prism';
+    }
+    .navbar-toggler{
+      margin-right: 10px;
+    }
+    .nav-link{
+      margin-left: 10px;
+      font-family: 'Poppins';
+    }
+    .navbar .navbar-expand-lg .navbar-dark .bg-dark{
+      margin-bottom: 10px;
+
+    }
+    .subtitulo{
+      color: #FFF;
+      font-family: 'Poppins';
+      font: 12px;
+      margin: 10px 5px 10px 5px;
+      text-align: center;
+    }
+    .novoCarrossel {
+      margin-left: 10px;
+    }
+    hr{
+      width: 100px;
+      height: 4px;
+      background-color: #FFA500; /* Cor de fundo */
+      margin: 20px auto; /* Margem para centralizar horizontalmente */
+      border: none;
+
+    }
+
+
+
+    /* Estilos do conteúdo principal */
+
+
+    @media (max-width: 768px) {
+      .square {
+        width: calc(33.33% - 10px); /* Aumente a largura para dispositivos móveis */
+        height: 170px; /* Mantenha a mesma altura */
+        margin: 5px;
+      }
+    }
+    .otherCarousel{
+      padding-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
-<div class="login-container">
-  <h2>Login</h2>
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Senha">
-  <label for="showPassword">Mostrar Senha</label>
-  <input type="checkbox" id="showPassword">
-  <button onclick="validateAndLogin()">Entrar</button>
-  <button onclick="register()">Cadastrar</button>
-</div>
-<div id="loading-container" style="display: none;">
-  <div class="loading"></div>
-</div>
-<script>
-  var emailInput = document.getElementById('email');
-  var passwordInput = document.getElementById('password');
-  var loginButton = document.getElementById('loginButton');
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand"  href="#">Dicas de filmes</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#imageCarousel">Sugestões</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#novoCarousel">Ação</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#terrorCarousel">Filmes de Terror</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#otherCarousel">Comédias</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <p class="subtitulo">🎬 Bem-vindos ao nosso cantinho de filmes! 🍿
 
-  function validateAndLogin() {
-    if (emailInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
-      hideLoginForm();
-      showLoading();
-      setTimeout(function() {
-        hideLoading();
-        redirectToPage();
-      }, 5000);
+    Preparem-se para uma jornada cinematográfica repleta de emoções. Aqui, todos os dias são uma tela em branco pronta para histórias incríveis. Sejam bem-vindos ao nosso mundo de cinema! 🌟📽️</p>
+
+
+    <hr>
+
+  <div class="cab">
+
+    <!-- <button class="btn btn-sair" onclick="voltarParaIndex()">Sair</button> -->
+    <h2 class="sugestao">Sugestões</h2>
+  </div>
+  <div id="imageCarousel" class="carousel slide" >
+    <div class="carousel-inner">
+      <!-- Quadrados do carrossel - Linha 1 -->
+      <div class="carousel-item active">
+        <div class="d-flex justify-content-center">
+          <div class="square" id="square1"> <!-- Quadrado 1 --> </div>
+          <div class="square" id="square2"> <!-- Quadrado 2 --> </div>
+          <div class="square" id="square3"> <!-- Quadrado 3 --> </div>
+        </div>
+      </div>
+      <!-- Quadrados do carrossel - Linha 2 -->
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center">
+          <div class="square" id="square4"> <!-- Quadrado 4 --> </div>
+          <div class="square" id="square5"> <!-- Quadrado 5 --> </div>
+          <div class="square" id="square6"> <!-- Quadrado 6 --> </div>
+        </div>
+      </div>
+      <!-- Quadrados do carrossel - Linha 3 -->
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center">
+          <div class="square" id="square7"> <!-- Quadrado 7 --> </div>
+          <div class="square" id="square8"> <!-- Quadrado 8 --> </div>
+          <div class="square" id="square9"> <!-- Quadrado 9 --> </div>
+        </div>
+      </div>
+      <!-- Quadrados do carrossel - Linha 4 -->
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center">
+          <div class="square" id="square10"> <!-- Quadrado 10 --> </div>
+          <div class="square" id="square11"> <!-- Quadrado 11 --> </div>
+          <div class="square" id="square12"> <!-- Quadrado 12 --> </div>
+        </div>
+      </div>
+    </div>
+    <!-- Controles do carrossel -->
+    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button> -->
+    <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="subTerror">
+    <h3 class="terror">Filmes de Terror</h3>
+  </div>
+
+  <!-- Carrossel de Imagens 2 (Filmes de terror) -->
+  <div id="terrorCarousel" class="carousel slide" >
+    <div class="carousel-inner">
+      <!-- Quadrados do carrossel - Linha 1 -->
+      <div class="carousel-item active">
+        <div class="d-flex justify-content-center">
+          <div class="square" id="square13"> <!-- Quadrado 13 --> </div>
+          <div class="square" id="square14"> <!-- Quadrado 14 --> </div>
+          <div class="square" id="square15"> <!-- Quadrado 15 --> </div>
+        </div>
+      </div>
+      <!-- Quadrados do carrossel - Linha 2 -->
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center">
+          <div class="square" id="square16"> <!-- Quadrado 16 --> </div>
+          <div class="square" id="square17"> <!-- Quadrado 17 --> </div>
+          <div class="square" id="square18"> <!-- Quadrado 18 --> </div>
+        </div>
+      </div>
+      <!-- Adicione mais slides e quadrados conforme necessário -->
+    </div>
+    <!-- Controles do carrossel -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#terrorCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#terrorCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- Carrossel de Imagens 3 (Outro carrossel) -->
+  <div class="subComedia">
+    <h3 class="comedia">Comédias</h3>
+  </div>
+  <div id="otherCarousel" class="carousel slide" >
+    <div class="carousel-inner">
+      <!-- Quadrados do carrossel - Linha 1 -->
+      <div class="carousel-item active">
+        <div class="d-flex justify-content-center">
+          <div class="square" id="square19"> <!-- Quadrado 19 --> </div>
+          <div class="square" id="square20"> <!-- Quadrado 20 --> </div>
+          <div class="square" id="square21"> <!-- Quadrado 21 --> </div>
+        </div>
+      </div>
+      <!-- Quadrados do carrossel - Linha 2 -->
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center">
+          <div class="square" id="square22"> <!-- Quadrado 22 --> </div>
+          <div class="square" id="square23"> <!-- Quadrado 23 --> </div>
+          <div class="square" id="square24"> <!-- Quadrado 24 --> </div>
+        </div>
+      </div>
+      <!-- Adicione mais slides e quadrados conforme necessário -->
+    </div>
+    <!-- Controles do carrossel -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#otherCarousel" >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#otherCarousel" >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- Carrossel de Imagens 4 (Novo carrossel) -->
+<div class="subNovoCarrossel">
+  <h3 class="novoCarrossel">Ação</h3>
+</div>
+<div id="novoCarousel" class="carousel slide">
+  <div class="carousel-inner">
+    <!-- Quadrados do carrossel - Linha 1 -->
+    <div class="carousel-item active">
+      <div class="d-flex justify-content-center">
+        <div class="square" id="square25"> <!-- Quadrado 25 --> </div>
+        <div class="square" id="square26"> <!-- Quadrado 26 --> </div>
+        <div class="square" id="square27"> <!-- Quadrado 27 --> </div>
+      </div>
+    </div>
+    <!-- Quadrados do carrossel - Linha 2 -->
+    <div class="carousel-item">
+      <div class="d-flex justify-content-center">
+        <div class="square" id="square28"> <!-- Quadrado 28 --> </div>
+        <div class="square" id="square29"> <!-- Quadrado 29 --> </div>
+        <div class="square" id="square30"> <!-- Quadrado 30 --> </div>
+      </div>
+    </div>
+    <!-- Adicione mais slides e quadrados conforme necessário -->
+  </div>
+  <!-- Controles do carrossel -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#novoCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#novoCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+  <!-- Inclua o Bootstrap JS (popper.js incluído) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+    // Função para adicionar uma imagem a um quadrado
+    function addImageToSquare(squareId, imageUrl, nomeFilme) {
+  const square = document.getElementById(squareId);
+  square.style.backgroundImage = `url('${imageUrl}')`;
+  square.addEventListener('click', () => openFilmePage(nomeFilme));
+}
+    function voltarParaIndex() {
+      window.location.href = 'index.html';
     }
-  }
+    function openFilmePage(nomeFilme) {
+  window.location.href = `filme.html?filme=${encodeURIComponent(nomeFilme)}`;
+}
 
-  function hideLoginForm() {
-    var loginContainer = document.querySelector('.login-container');
-    loginContainer.style.display = 'none';
-  }
 
-  function showLoading() {
-    var loadingContainer = document.getElementById('loading-container');
-    loadingContainer.style.display = 'flex';
-  }
 
-  function hideLoading() {
-    var loadingContainer = document.getElementById('loading-container');
-    loadingContainer.style.display = 'none';
-  }
+    // Exemplo: Adicionar imagens aos quadrados do carrossel "Sugestões"
+    addImageToSquare('square1', 'images/dungeons-e-dragons.jpg', 'Dungeons & Dragons');
+    addImageToSquare('square2', 'images/cacaBruxas.jpg', 'Caça as Bruxas');
+    addImageToSquare('square3', 'images/medio.jpg', 'Besouro Azul');
+    addImageToSquare('square4', 'images/missao-impossivel-poste.jpg', 'Missão Impossivel acerto de contas');
+    addImageToSquare('square5', 'images/semLimites.jpg', 'Sem limites');
+    addImageToSquare('square6', 'images/SomosTodosIguias.jpg', 'Somos todos diferentes');
+    addImageToSquare('square7', 'images/veneza.jpg', 'Veneza');
+    addImageToSquare('square8', 'images/nasondasdafe.jpg', 'Nas ondas da fé');
+    addImageToSquare('square9', 'images/infiltrado.jpg', 'Infiltrado');
+    addImageToSquare('square10', 'images/euacredito.jpg', 'Eu acredito');
+    addImageToSquare('square11', 'images/Menina.jpg', 'A menina que roubava livros');
+    addImageToSquare('square12', 'images/Contagio.png', 'Contágio');
 
-  function redirectToPage() {
-    window.location.href = 'teste.html';
-  }
-</script>
+
+
+    addImageToSquare('square13', 'images/terror/colheita.jpg');
+    addImageToSquare('square14', 'images/terror/convite.jpg');
+    addImageToSquare('square15', 'images/terror/jogos.jpg');
+    addImageToSquare('square16', 'images/terror/panico.jpg');
+    addImageToSquare('square17', 'images/terror/sorria.jpg');
+    addImageToSquare('square18', 'images/terror/ultimo.jpg');
+    // Adicione mais imagens aos quadrados conforme necessário
+
+    // Exemplo: Adicionar imagens aos quadrados do terceiro carrossel
+    addImageToSquare('square19', 'images/comedia/vizinhos.jpg');
+    addImageToSquare('square20', 'images/comedia/todo-poderoso.jpg');
+    addImageToSquare('square21', 'images/comedia/alto.jpg');
+    addImageToSquare('square22', 'images/comedia/Debiloide.jpg');
+    addImageToSquare('square23', 'images/comedia/funeral.jpg');
+    addImageToSquare('square24', 'images/comedia/branquelas.jpg');
+    // Adicione mais imagens aos quadrados conforme necessário
+    addImageToSquare('square25', 'images/Acao/assasino.jpg');
+    addImageToSquare('square26', 'images/Acao/acaoviolenta.jpg');
+    addImageToSquare('square27', 'images/Acao/alerta-vermelho.jpg');
+    addImageToSquare('square28', 'images/Acao/codigo.jpg');
+    addImageToSquare('square29', 'images/Acao/implacavel.jpg');
+    addImageToSquare('square30', 'images/Acao/rastro.jpg');
+  </script>
 </body>
+
 </html>
