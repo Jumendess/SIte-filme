@@ -75,6 +75,12 @@
       border: none;
 
     }
+    .subNovoCarrossel{
+      margin: 10px 0px 10px 0px;
+    }
+    .cartaz{
+      margin-left: 10px;
+    }
 
 
 
@@ -122,6 +128,39 @@
 
 
     <hr>
+    <div class="subCartaz">
+      <h3 class="cartaz"> Em Cartaz</h3>
+    </div>
+    <div id="cartazCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <!-- Quadrados do carrossel - Linha 1 -->
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center">
+            <div class="square" id="square31"> <!-- Quadrado 31 --> </div>
+            <div class="square" id="square32"> <!-- Quadrado 32 --> </div>
+            <div class="square" id="square33"> <!-- Quadrado 33 --> </div>
+          </div>
+        </div>
+        <!-- Quadrados do carrossel - Linha 2 -->
+        <div class="carousel-item">
+          <div class="d-flex justify-content-center">
+            <div class="square" id="square34"> <!-- Quadrado 34 --> </div>
+            <div class="square" id="square35"> <!-- Quadrado 35 --> </div>
+            <div class="square" id="square36"> <!-- Quadrado 36 --> </div>
+          </div>
+        </div>
+        <!-- Adicione mais slides e quadrados conforme necessário -->
+      </div>
+      <!-- Controles do carrossel -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#cartazCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#cartazCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
 
   <div class="cab">
 
@@ -337,6 +376,13 @@
     addImageToSquare('square28', 'images/Acao/codigo.jpg');
     addImageToSquare('square29', 'images/Acao/implacavel.jpg');
     addImageToSquare('square30', 'images/Acao/rastro.jpg');
+    // proximos
+    addImageToSquare('square31', 'images/cartaz/arcanjo.jpg');
+    addImageToSquare('square32', 'images/cartaz/dracula.jpg');
+    addImageToSquare('square33', 'images/cartaz/ophe.jpg');
+    addImageToSquare('square34', 'images/cartaz/perdida.jpg');
+    addImageToSquare('square35', 'images/cartaz/tranformes.jpg');
+    addImageToSquare('square36', 'images/cartaz/vorazes.jpg');
   </script>
 </body>
 
